@@ -1,4 +1,5 @@
-plugins {id 'fabric-loom' version '0.11-SNAPSHOT'
+plugins {
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
 	id "org.quiltmc.quilt-mappings-on-loom" version "3.1.1"
 }
@@ -53,7 +54,6 @@ jar {
 	}
 }
 
-// configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
