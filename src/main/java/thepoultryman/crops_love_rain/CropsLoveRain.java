@@ -1,10 +1,10 @@
-package thepoultryman.modid;
+package thepoultryman.crops_love_rain;
 
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ModClass implements ModInitializer {
+public class CropsLoveRain implements ModInitializer {
 	public static final String MOD_ID = "modid";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 

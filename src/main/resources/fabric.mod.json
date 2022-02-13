@@ -1,28 +1,28 @@
 {
     "schemaVersion": 1,
-    "id": "modid",
+    "id": "crops_love_rain",
     "version": "0.1.0",
 
-    "name": "Mod Name",
-    "description": "This mod is a template for other mods.",
+    "name": "Crops Love Rain",
+    "description": "Makes crops grow faster when it's raining",
     "authors": [
         "ThePoultryMan"
     ],
     "contact": {
-        "sources": "https://github.com/ThePoultryMan/Mod-Template"
+        "sources": "https://github.com/ThePoultryMan/Crops-Love_Rain"
     },
 
     "license": "CC0-1.0",
-    "icon": "assets/modid/icon.png",
+    "icon": "assets/crops_love_rain/icon.png",
 
     "environment": "*",
     "entrypoints": {
         "main": [
-            "thepoultryman.modid.ModClass"
+            "thepoultryman.crops_love_rain.CropsLoveRain"
         ]
     },
     "mixins": [
-        "modid.mixins.json"
+        "crops_love_rain.mixins.json"
     ],
 
     "depends": {
