@@ -29,9 +29,9 @@ public abstract class CropGrowthSpeedup {
 
 	@Inject(at = @At("HEAD"), method = "randomTick")
 	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-		if (world.getBaseLightLevel(pos, 0) >= 9 && world.isRaining()) {
+		int rainGrowthSpeed = world.getGameRules().getInt(CropsLoveRain.CROP_GROWTH_SPEED_DURING_RAIN);
+		if (world.getBaseLightLevel(pos, 0) >= 9 && world.isRaining() && rainGrowthSpeed != 0) {
 			Block cropBlock = world.getBlockState(pos).getBlock();
-			int rainGrowthSpeed = world.getGameRules().getInt(CropsLoveRain.CROP_GROWTH_SPEED_DURING_RAIN);
 			if (random.nextInt((int) (rainGrowthSpeed / getAvailableMoisture(cropBlock, world, pos)) + 1) == 0) {
 				world.setBlockState(pos, this.withAge(this.getAge(state) + 1), 2);
 			}
