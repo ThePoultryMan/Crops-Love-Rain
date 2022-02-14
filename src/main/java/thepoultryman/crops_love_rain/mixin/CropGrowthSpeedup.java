@@ -17,7 +17,7 @@ import thepoultryman.crops_love_rain.CropsLoveRain;
 import java.util.Random;
 
 @Mixin(CropBlock.class)
-public abstract class CropsLoveRainMixin {
+public abstract class CropGrowthSpeedup {
 	@Shadow public abstract BlockState withAge(int age);
 
 	@Shadow protected abstract int getAge(BlockState state);

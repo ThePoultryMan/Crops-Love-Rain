@@ -4,7 +4,7 @@
   "package": "thepoultryman.crops_love_rain.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "CropsLoveRainMixin"
+      "CropGrowthSpeedup"
   ],
   "injectors": {
     "defaultRequire": 1
