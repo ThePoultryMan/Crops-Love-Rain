@@ -1,4 +1,4 @@
-<a href="https://curseforge.com/Minecraft/mc-mods/fabric"><img src="https://user-images.githubusercontent.com/66281330/153967852-6b03d1f2-d795-4748-afe9-6074ea25701a.png" alt="Requires Fabric API" width=225></a>
+<a href="https://curseforge.com/Minecraft/mc-mods/fabric" target="_blank"><img src="https://user-images.githubusercontent.com/66281330/153967852-6b03d1f2-d795-4748-afe9-6074ea25701a.png" alt="Requires Fabric API" width=225></a>
 
 Crops Love Rain makes crops grow faster when it's raining.
 
