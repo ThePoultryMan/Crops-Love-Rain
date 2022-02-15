@@ -3,7 +3,6 @@ package thepoultryman.crops_love_rain.mixin;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
