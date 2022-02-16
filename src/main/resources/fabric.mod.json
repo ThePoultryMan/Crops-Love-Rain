@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "crops_love_rain",
-    "version": "1.0.0",
+    "version": "1.1.0",
 
     "name": "Crops Love Rain",
     "description": "Makes crops grow faster when it's raining",
