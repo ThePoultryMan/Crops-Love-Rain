@@ -31,7 +31,7 @@ public abstract class CropGrowthSpeedup {
 		int rainGrowthSpeed = world.getGameRules().getInt(CropsLoveRain.CROP_GROWTH_SPEED_DURING_RAIN);
 		if (world.getBaseLightLevel(pos, 0) >= 9 && world.hasRain(pos) && rainGrowthSpeed != 0) {
 			Block cropBlock = world.getBlockState(pos).getBlock();
-			if (random.nextInt((int) (rainGrowthSpeed / getAvailableMoisture(cropBlock, world, pos)) + 1) == 0) {
+			if (random.nextInt((int) (rainGrowthSpeed / getAvailableMoisture(cropBlock, world, pos)) + 1) == 0 && this.getAge(state) < 7) {
 				world.setBlockState(pos, this.withAge(this.getAge(state) + 1), 2);
 			}
 		}
