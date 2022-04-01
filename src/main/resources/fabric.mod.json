@@ -12,7 +12,7 @@
         "sources": "https://github.com/ThePoultryMan/Crops-Love_Rain"
     },
 
-    "license": "CC0-1.0",
+    "license": "MIT",
     "icon": "assets/crops_love_rain/icon.png",
 
     "environment": "*",
