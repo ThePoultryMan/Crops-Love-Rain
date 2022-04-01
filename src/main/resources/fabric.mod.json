@@ -12,7 +12,7 @@
         "sources": "https://github.com/ThePoultryMan/Crops-Love_Rain"
     },
 
-    "license": "CC0-1.0",
+    "license": "MIT",
     "icon": "assets/crops_love_rain/icon.png",
 
     "environment": "*",
@@ -28,7 +28,7 @@
     "depends": {
         "fabricloader": ">=0.12.12",
         "fabric": "*",
-        "minecraft": "1.18.x",
+        "minecraft": ">=1.18",
         "java": ">=17"
     },
     "suggests": {
