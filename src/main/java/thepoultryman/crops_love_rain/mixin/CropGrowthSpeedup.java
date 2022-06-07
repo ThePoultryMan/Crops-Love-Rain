@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +28,7 @@ public abstract class CropGrowthSpeedup {
 	}
 
 	@Inject(at = @At("HEAD"), method = "randomTick")
-	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
 		int rainGrowthSpeed = world.getGameRules().getInt(CropsLoveRain.CROP_GROWTH_SPEED_DURING_RAIN);
 		if (world.getBaseLightLevel(pos, 0) >= 9 && world.hasRain(pos) && rainGrowthSpeed != 0) {
 			Block cropBlock = world.getBlockState(pos).getBlock();
