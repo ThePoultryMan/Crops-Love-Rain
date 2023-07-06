@@ -4,16 +4,13 @@ import io.github.thepoultryman.cactusconfig.ConfigManager;
 import io.github.thepoultryman.cactusconfig.OptionHolder;
 import io.github.thepoultryman.cactusconfig.Options;
 import net.minecraft.text.Text;
-import thepoultryman.crops_love_rain.CropsLoveRain;
-
-import java.util.Arrays;
 
 public class CropsConfigManager extends ConfigManager {
     @Options.OptionHolder
-    public OptionHolder speed = new OptionHolder(Text.translatable("crops_love_rain.config.speed"), Text.translatable("crops_love_rain.config.speed.desc"));
-    @Options.Boolean(tab = "speed")
+    public OptionHolder general = new OptionHolder(Text.translatable("crops_love_rain.config.general"), null);
+    @Options.Boolean(tab = "general")
     public boolean useRainGrowthSpeed;
-    @Options.Integer(tab = "speed", defaultValue = 10)
+    @Options.Integer(tab = "general", defaultValue = 10)
     public int rainGrowthSpeed;
 
 
