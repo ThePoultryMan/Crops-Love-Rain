@@ -19,6 +19,9 @@
     "entrypoints": {
         "main": [
             "thepoultryman.crops_love_rain.CropsLoveRain"
+        ],
+        "modmenu": [
+            "thepoultryman.crops_love_rain.config.ModMenuIntegration"
         ]
     },
     "mixins": [

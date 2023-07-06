@@ -26,7 +26,7 @@ public abstract class GrowthSpeedup {
 
     @Inject(at = @At("HEAD"), method = "randomTick")
     public void crops_love_rain$extraBlockTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-        if (!world.hasRain(pos)) return;
+        if (!CropsLoveRain.CONFIG.useRainGrowthSpeed || !world.hasRain(pos)) return;
         if (state.get(STAGE) == 0 && world.isAir(pos.up()) && world.getBaseLightLevel(pos.up(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(world, random)) {
             int bambooBelow = countBambooBelow(world, pos) + 1;
             if (bambooBelow > 16) {

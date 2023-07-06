@@ -19,6 +19,19 @@ repositories {
 		name = 'Quilt Snapshots'
 		url = 'https://maven.quiltmc.org/repository/snapshot'
 	}
+
+	maven {
+		name = "Carbon Toast"
+		url = "https://dl.cloudsmith.io/public/carbon-toast/cactus-config/maven/"
+	}
+	maven {
+		name = 'Gegy'
+		url = 'https://maven.gegy.dev'
+	}
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com'
+	}
 }
 
 dependencies {
@@ -27,6 +40,10 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	include modImplementation("io.github.thepoultryman:cactus-config:${project.cactus_config_version}+knot+${project.minecraft_version}")
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modImplementation "dev.lambdaurora:spruceui:5.0.0+1.20"
 }
 
 processResources {

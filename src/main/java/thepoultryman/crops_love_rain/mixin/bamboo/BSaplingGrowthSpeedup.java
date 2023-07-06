@@ -19,7 +19,7 @@ public abstract class BSaplingGrowthSpeedup {
 
     @Inject(at = @At("TAIL"), method = "randomTick")
     public void crops_love_rain$extraSaplingTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-        if (!world.hasRain(pos)) return;
+        if (!CropsLoveRain.CONFIG.useRainGrowthSpeed || !world.hasRain(pos)) return;
         if (world.isAir(pos.up()) && world.getBaseLightLevel(pos.up(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(world, random)) {
             this.grow(world, pos);
         }
