@@ -6,9 +6,10 @@
 Crops Love Rain makes crops grow faster when it's raining.
 
 ## Configuration
-### Gamerule
+_Updated as of 1.4.0_
 
-The speed that crops grow at can be changed with the `cropGrowthSpeedDuringRain` gamerule. The default value is 10. A lower value is a faster growth rate, and a higher value is a slower growth rate.
+To configure the speed at which crops grow there are two options:
+1. Use [Mod Menu](https://modrinth.com/mod/modmenu) to configure the settings in game with a gui.
+2. Go into the config file and change the settings.
 
-### Disabling
-You can disable the effect by setting the `cropGrowthSpeedDuringRain` to 0.
+ _Note: Version 1.3.0 and below are no longer supported._

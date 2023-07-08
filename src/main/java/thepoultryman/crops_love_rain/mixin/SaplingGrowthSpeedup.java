@@ -20,8 +20,7 @@ public abstract class SaplingGrowthSpeedup {
 
     @Inject(at = @At("TAIL"), method = "randomTick")
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-        int rainGrowthSpeed = world.getGameRules().getInt(CropsLoveRain.CROP_GROWTH_SPEED_DURING_RAIN);
-        if (rainGrowthSpeed != 0 && world.hasRain(pos) && random.nextInt(rainGrowthSpeed / 2) == 0) {
+        if (CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.Sapling)) {
             generate(world, pos, state, random);
         }
     }

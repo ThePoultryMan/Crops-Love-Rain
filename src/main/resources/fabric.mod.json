@@ -19,6 +19,9 @@
     "entrypoints": {
         "main": [
             "thepoultryman.crops_love_rain.CropsLoveRain"
+        ],
+        "modmenu": [
+            "thepoultryman.crops_love_rain.config.ModMenuIntegration"
         ]
     },
     "mixins": [
@@ -26,9 +29,9 @@
     ],
 
     "depends": {
-        "fabricloader": ">=0.14.6",
-        "fabric": "*",
-        "minecraft": ">=1.19",
+        "fabricloader": ">=0.14.21",
+        "fabric-api": ">=0.85.0",
+        "minecraft": ">=1.20.1",
         "java": ">=17"
     },
     "suggests": {
