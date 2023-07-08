@@ -9,7 +9,7 @@ import thepoultryman.crops_love_rain.CropsLoveRain;
 
 public class CropsConfigManager extends ConfigManager {
     @Options.OptionHolder
-    public OptionHolder general = new OptionHolder(Text.translatable("crops_love_rain.config.general"), null);
+    public OptionHolder general = new OptionHolder(Text.translatable("crops_love_rain.config.general"), Text.translatable("crops_love_rain.config.general.desc"));
     @Options.Boolean(tab = "general")
     public boolean useRainGrowthSpeed;
     @Options.Integer(tab = "general", defaultValue = 10)
@@ -24,19 +24,19 @@ public class CropsConfigManager extends ConfigManager {
     private final CactusUtil.ConfigOption individualSeparator = new CactusUtil.ConfigOption(true, false);
     @Options.Boolean(tab = "individual")
     public boolean useGeneralSpeedBamboo;
-    @Options.Integer(tab = "individual")
+    @Options.Integer(tab = "individual", defaultValue = 10)
     public int bambooCustomSpeed;
     @Options.Boolean(tab = "individual")
     public boolean useGeneralSpeedCrops;
-    @Options.Integer(tab = "individual")
+    @Options.Integer(tab = "individual", defaultValue = 10)
     public int cropsCustomSpeed;
     @Options.Boolean(tab = "individual")
     public boolean useGeneralSpeedSaplings;
-    @Options.Integer(tab = "individual")
+    @Options.Integer(tab = "individual", defaultValue = 10)
     public int saplingCustomSpeed;
     @Options.Boolean(tab = "individual")
     public boolean useGeneralSpeedSugarCane;
-    @Options.Integer(tab = "individual")
+    @Options.Integer(tab = "individual", defaultValue = 10)
     public int sugarCaneCustomSpeed;
 
     @Override

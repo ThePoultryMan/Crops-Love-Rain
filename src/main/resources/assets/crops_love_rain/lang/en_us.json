@@ -1,6 +1,7 @@
 {
     "crops_love_rain.config.title": "Crops Love Rain Configuration",
     "crops_love_rain.config.general": "General",
+    "crops_love_rain.config.general.desc": "(Lower values are equal to a higher speed.)",
     "cactus_config.option.general.useRainGrowthSpeed": "Rain Growth Boost",
     "cactus_config.option.general.rainGrowthSpeed": "Rain Growth Speed",
     "crops_love_rain.config.individual": "Individual",
