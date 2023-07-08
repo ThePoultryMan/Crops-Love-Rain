@@ -5,6 +5,7 @@ import io.github.thepoultryman.cactusconfig.OptionHolder;
 import io.github.thepoultryman.cactusconfig.Options;
 import io.github.thepoultryman.cactusconfig.util.CactusUtil;
 import net.minecraft.text.Text;
+import thepoultryman.crops_love_rain.CropsLoveRain;
 
 public class CropsConfigManager extends ConfigManager {
     @Options.OptionHolder
@@ -50,5 +51,14 @@ public class CropsConfigManager extends ConfigManager {
     @Override
     public boolean canReset() {
         return true;
+    }
+
+    public boolean usesCustomSpeed(CropsLoveRain.CropType cropType) {
+        return switch (cropType) {
+            case Bamboo -> useGeneralSpeedBamboo;
+            case Crop -> useGeneralSpeedCrops;
+            case Sapling -> useGeneralSpeedSaplings;
+            case SugarCane -> useGeneralSpeedSugarCane;
+        };
     }
 }

@@ -1,6 +1,7 @@
 package thepoultryman.crops_love_rain;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
@@ -17,7 +18,30 @@ public class CropsLoveRain implements ModInitializer {
 		CONFIG.loadConfig();
 	}
 
-	public static boolean shouldGrowExtra(World world, RandomGenerator random) {
-		return random.nextInt((CONFIG.rainGrowthSpeed * 10) / 2) == 0;
+	public static boolean shouldGrowExtra(World world, BlockPos blockPos, RandomGenerator random, CropType cropType) {
+		if (!world.hasRain(blockPos) || !CONFIG.useRainGrowthSpeed) return false;
+		int growthSpeed = 0;
+		if (CONFIG.useIndividualSpeeds) {
+			if (CONFIG.usesCustomSpeed(cropType)) {
+				growthSpeed = switch (cropType) {
+					case Bamboo -> CONFIG.bambooCustomSpeed;
+					case Crop -> CONFIG.cropsCustomSpeed;
+					case Sapling -> CONFIG.saplingCustomSpeed;
+					case SugarCane -> CONFIG.sugarCaneCustomSpeed;
+				};
+				return random.nextInt(growthSpeed) == 0;
+			} else {
+				return random.nextInt(CONFIG.rainGrowthSpeed) == 0;
+			}
+		} else {
+			return random.nextInt(CONFIG.rainGrowthSpeed) == 0;
+		}
+	}
+
+	public enum CropType {
+		Bamboo,
+		Crop,
+		Sapling,
+		SugarCane,
 	}
 }

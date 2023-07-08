@@ -28,13 +28,11 @@ public class SugarCaneGrowthSpeedup extends Block {
 
     @Inject(at = @At("HEAD"), method = "randomTick")
     public void crops_love_rain$sugarCaneExtraTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-        if (!world.hasRain(pos)) return;
-        if (!CropsLoveRain.CONFIG.useRainGrowthSpeed) return;
         if (world.isAir(pos.up())) {
             int caneBlocks; // Determines how may sugar canes are in a "pillar".
             for (caneBlocks = 1; world.getBlockState(pos.down(caneBlocks)).isOf(Blocks.SUGAR_CANE); ++caneBlocks);
 
-            if (caneBlocks < 3 && CropsLoveRain.shouldGrowExtra(world, random)) {
+            if (caneBlocks < 3 && CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.SugarCane)) {
                 int age = state.get(AGE);
                 if (age == 15) {
                     world.setBlockState(pos.up(), this.getDefaultState());               // Creates a sugar cane block above this one.
