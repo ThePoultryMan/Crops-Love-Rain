@@ -1,59 +1,35 @@
 package thepoultryman.crops_love_rain.config;
 
-import io.github.thepoultryman.cactusconfig.ConfigManager;
-import io.github.thepoultryman.cactusconfig.OptionHolder;
-import io.github.thepoultryman.cactusconfig.Options;
-import io.github.thepoultryman.cactusconfig.util.CactusUtil;
-import net.minecraft.text.Text;
+import eu.midnightdust.lib.config.MidnightConfig;
 import thepoultryman.crops_love_rain.CropsLoveRain;
 
-public class CropsConfigManager extends ConfigManager {
-    @Options.OptionHolder
-    public OptionHolder general = new OptionHolder(Text.translatable("crops_love_rain.config.general"), Text.translatable("crops_love_rain.config.general.desc"));
-    @Options.Boolean(tab = "general")
-    public boolean useRainGrowthSpeed;
-    @Options.Integer(tab = "general", defaultValue = 10)
-    public int rainGrowthSpeed;
-    @Options.OptionHolder
-    public final OptionHolder individual = new OptionHolder(
-            Text.translatable("crops_love_rain.config.individual"), Text.translatable("crops_love_rain.config.individual.desc")
-    );
-    @Options.Boolean(tab = "individual", defaultValue = false)
-    public boolean useIndividualSpeeds;
-    @Options.Separator(tab = "individual")
-    private final CactusUtil.ConfigOption individualSeparator = new CactusUtil.ConfigOption(true, false);
-    @Options.Boolean(tab = "individual")
-    public boolean useGeneralSpeedBamboo;
-    @Options.Integer(tab = "individual", defaultValue = 10)
-    public int bambooCustomSpeed;
-    @Options.Boolean(tab = "individual")
-    public boolean useGeneralSpeedCrops;
-    @Options.Integer(tab = "individual", defaultValue = 10)
-    public int cropsCustomSpeed;
-    @Options.Boolean(tab = "individual")
-    public boolean useGeneralSpeedSaplings;
-    @Options.Integer(tab = "individual", defaultValue = 10)
-    public int saplingCustomSpeed;
-    @Options.Boolean(tab = "individual")
-    public boolean useGeneralSpeedSugarCane;
-    @Options.Integer(tab = "individual", defaultValue = 10)
-    public int sugarCaneCustomSpeed;
+public class CropsConfigManager extends MidnightConfig {
+    @Entry(category = "general")
+    public static boolean useRainGrowthSpeed = true;
+    @Entry(category = "general")
+    public static int rainGrowthSpeed = 10;
 
-    @Override
-    protected void load() {
-        super.load();
-    }
+    @Entry(category = "individual")
+    public static boolean useIndividualSpeeds = false;
 
-    public CropsConfigManager(String fileName, boolean loadOnServer) {
-        super(fileName, loadOnServer);
-    }
+    @Entry(category = "individual")
+    public static boolean useGeneralSpeedBamboo = true;
+    @Entry(category = "individual")
+    public static int bambooCustomSpeed = 10;
+    @Entry(category = "individual")
+    public static boolean useGeneralSpeedCrops = true;
+    @Entry(category = "individual")
+    public static int cropsCustomSpeed = 10;
+    @Entry(category = "individual")
+    public static boolean useGeneralSpeedSaplings = true;
+    @Entry(category = "individual")
+    public static int saplingCustomSpeed = 10;
+    @Entry(category = "individual")
+    public static boolean useGeneralSpeedSugarCane = true;
+    @Entry(category = "individual")
+    public static int sugarCaneCustomSpeed = 10;
 
-    @Override
-    public boolean canReset() {
-        return true;
-    }
-
-    public boolean usesCustomSpeed(CropsLoveRain.CropType cropType) {
+    public static boolean usesCustomSpeed(CropsLoveRain.CropType cropType) {
         return switch (cropType) {
             case Bamboo -> useGeneralSpeedBamboo;
             case Crop -> useGeneralSpeedCrops;
