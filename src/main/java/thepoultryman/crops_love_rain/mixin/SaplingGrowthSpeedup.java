@@ -1,7 +1,7 @@
 package thepoultryman.crops_love_rain.mixin;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SaplingBlock;
+import net.minecraft.block.sapling.SaplingBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
