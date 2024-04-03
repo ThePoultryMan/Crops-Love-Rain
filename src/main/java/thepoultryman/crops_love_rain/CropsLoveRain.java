@@ -16,19 +16,14 @@ public class CropsLoveRain implements ModInitializer {
 
 	public static boolean shouldGrowExtra(World world, BlockPos blockPos, RandomGenerator random, CropType cropType) {
 		if (!world.hasRain(blockPos) || !CropsConfigManager.useRainGrowthSpeed) return false;
-		int growthSpeed = 0;
 		if (CropsConfigManager.useIndividualSpeeds) {
-			if (CropsConfigManager.usesCustomSpeed(cropType)) {
-				growthSpeed = switch (cropType) {
-					case Bamboo -> CropsConfigManager.bambooCustomSpeed;
-					case Crop -> CropsConfigManager.cropsCustomSpeed;
-					case Sapling -> CropsConfigManager.saplingCustomSpeed;
-					case SugarCane -> CropsConfigManager.sugarCaneCustomSpeed;
-				};
-				return random.nextInt(growthSpeed) == 0;
-			} else {
-				return random.nextInt(CropsConfigManager.rainGrowthSpeed) == 0;
-			}
+			int growthSpeed = switch (cropType) {
+				case Bamboo -> CropsConfigManager.bambooCustomSpeed;
+				case Crop -> CropsConfigManager.cropsCustomSpeed;
+				case Sapling -> CropsConfigManager.saplingCustomSpeed;
+				case SugarCane -> CropsConfigManager.sugarCaneCustomSpeed;
+			};
+			return random.nextInt(growthSpeed) == 0;
 		} else {
 			return random.nextInt(CropsConfigManager.rainGrowthSpeed) == 0;
 		}
