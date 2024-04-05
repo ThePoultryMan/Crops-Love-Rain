@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "cropsloverain",
+  "version": "${version}",
+
+  "name": "Crops Love Rain",
+  "description": "Makes crops grow faster when it's raining.",
+  "authors": [],
+  "contact": {},
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.thepoultryman.cropsloverain.fabric.CropsLoveRainFabric"
+    ]
+  },
+  "mixins": [
+    "cropsloverain.mixins.json",
+    "cropsloverain-common.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.9",
+    "minecraft": ">=1.20.4"
+  }
+}
