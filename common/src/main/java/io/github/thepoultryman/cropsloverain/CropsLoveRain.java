@@ -1,8 +1,11 @@
 package io.github.thepoultryman.cropsloverain;
 
-public class CropsLoveRain
-{
+import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
+
+public class CropsLoveRain {
 	public static final String MOD_ID = "cropsloverain";
 
-	public static void init() {}
+	public static void init() {
+		CropsLoveRainConfig.init(MOD_ID, CropsLoveRainConfig.class);
+	}
 }
