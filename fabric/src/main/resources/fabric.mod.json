@@ -18,8 +18,7 @@
     ]
   },
   "mixins": [
-    "cropsloverain.mixins.json",
-    "cropsloverain-common.mixins.json"
+      "cropsloverain-common.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.9",

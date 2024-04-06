@@ -39,7 +39,7 @@ authors = "ThePoultryMan" #optional
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
 
 [[mixins]]
-config = "cropsloverain.mixins.json"
+config = "cropsloverain-common.mixins.json"
 
 # The description text for the mod (multi line!) (#mandatory)
 description = '''Makes crops grow faster when it's raining'''
