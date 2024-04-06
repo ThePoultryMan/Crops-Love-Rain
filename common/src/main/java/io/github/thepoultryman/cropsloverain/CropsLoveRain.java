@@ -14,7 +14,6 @@ public class CropsLoveRain {
 
 	public static boolean shouldGrowExtra(World world, BlockPos blockPos, RandomGenerator random, CropType cropType) {
 		if (!world.hasRain(blockPos) || !CropsLoveRainConfig.useRainGrowthSpeed) return false;
-		System.out.println(cropType.toString());
 		if (CropsLoveRainConfig.useIndividualSpeeds) {
 			int growthSpeed = switch (cropType) {
 				case Bamboo -> CropsLoveRainConfig.bambooCustomSpeed;
