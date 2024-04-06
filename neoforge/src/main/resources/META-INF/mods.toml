@@ -25,7 +25,7 @@ displayName = "Crops Love Rain" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="cropsloverain.png" #optional
+logoFile="assets/cropsloverain/icon.png" #optional
 # A text field displayed in the mod UI
 #credits="" #optional
 # A text field displayed in the mod UI
@@ -37,12 +37,14 @@ authors = "ThePoultryMan" #optional
 # NONE means that no display test is set on your mod. You need to do this yourself, see IExtensionPoint.DisplayTest for more information. You can define any scheme you wish with this value.
 # IMPORTANT NOTE: this is NOT an instruction as to which environments (CLIENT or DEDICATED SERVER) your mod loads on. Your mod should load (and maybe do nothing!) whereever it finds itself.
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
+description = '''
+Makes crops grow faster when it's raining
+'''
 
 [[mixins]]
 config = "cropsloverain-common.mixins.json"
 
 # The description text for the mod (multi line!) (#mandatory)
-description = '''Makes crops grow faster when it's raining'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.cropsloverain]] #optional
 # the modid of the dependency
