@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "io.github.thepoultryman.cropsloverain.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "mixins": [
+    "CropGrowthSpeedup",
+    "SaplingGrowthSpeedup",
+    "SugarCaneGrowthSpeedup",
+    "bamboo.GrowthSpeedup",
+    "bamboo.SaplingGrowthSpeedup"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
