@@ -8,6 +8,7 @@ out/
 output/
 bin/
 libs/
+.profileconfig.json
 
 .classpath
 .project
