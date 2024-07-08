@@ -24,7 +24,7 @@ configurations {
 dependencies {
     neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
 
-    include modImplementation("maven.modrinth:midnightlib:1.5.2-neoforge")
+    include modImplementation("maven.modrinth:midnightlib:${rootProject.midnightlib_version}-neoforge")
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }

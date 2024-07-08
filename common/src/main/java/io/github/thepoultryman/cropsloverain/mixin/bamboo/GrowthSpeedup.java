@@ -1,14 +1,14 @@
 package io.github.thepoultryman.cropsloverain.mixin.bamboo;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
-import net.minecraft.block.BambooBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BambooStalkBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,20 +16,20 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(BambooBlock.class)
+@Mixin(BambooStalkBlock.class)
 public abstract class GrowthSpeedup {
-    @Shadow @Final public static IntProperty STAGE;
+    @Shadow @Final public static IntegerProperty STAGE;
 
-    @Shadow protected abstract int countBambooBelow(BlockView world, BlockPos pos);
+    @Shadow protected abstract int getHeightBelowUpToMax(BlockGetter world, BlockPos pos);
 
-    @Shadow protected abstract void updateLeaves(BlockState state, World world, BlockPos pos, RandomGenerator random, int height);
+    @Shadow protected abstract void growBamboo(BlockState state, Level level, BlockPos pos, RandomSource random, int height);
 
     @Inject(at = @At("HEAD"), method = "randomTick")
-    public void crops_love_rain$extraBlockTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-        if (state.get(STAGE) == 0 && world.isAir(pos.up()) && world.getBaseLightLevel(pos.up(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.Bamboo)) {
-            int bambooBelow = countBambooBelow(world, pos) + 1;
+    public void crops_love_rain$extraBlockTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+        if (state.getValue(STAGE) == 0 && level.getBlockState(pos.above()).isAir() && level.getRawBrightness(pos.above(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Bamboo)) {
+            int bambooBelow = getHeightBelowUpToMax(level, pos) + 1;
             if (bambooBelow > 16) {
-                this.updateLeaves(state, world, pos, random, bambooBelow);
+                this.growBamboo(state, level, pos, random, bambooBelow);
             }
         }
     }

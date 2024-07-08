@@ -1,11 +1,11 @@
 package io.github.thepoultryman.cropsloverain.mixin;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CropBlock;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.random.RandomGenerator;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,16 +14,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CropBlock.class)
 public abstract class CropGrowthSpeedup {
-    @Shadow public abstract BlockState withAge(int age);
+    @Shadow public abstract BlockState getStateForAge(int age);
 
     @Shadow
     public abstract int getAge(BlockState state);
 
     @Inject(at = @At("HEAD"), method = "randomTick")
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random, CallbackInfo ci) {
-        if (world.getBaseLightLevel(pos, 0) >= 9) {
-            if (this.getAge(state) < 7 && CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.Crop)) {
-                world.setBlockState(pos, this.withAge(this.getAge(state) + 1), 2);
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+        if (level.getRawBrightness(pos, 0) >= 9) {
+            if (this.getAge(state) < 7 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Crop)) {
+                level.setBlock(pos, this.getStateForAge(this.getAge(state) + 1), 2);
             }
         }
     }

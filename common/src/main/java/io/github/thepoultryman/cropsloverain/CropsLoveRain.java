@@ -1,9 +1,9 @@
 package io.github.thepoultryman.cropsloverain;
 
 import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 
 public class CropsLoveRain {
 	public static final String MOD_ID = "cropsloverain";
@@ -12,8 +12,8 @@ public class CropsLoveRain {
 		CropsLoveRainConfig.init(MOD_ID, CropsLoveRainConfig.class);
 	}
 
-	public static boolean shouldGrowExtra(World world, BlockPos blockPos, RandomGenerator random, CropType cropType) {
-		if (!world.hasRain(blockPos) || !CropsLoveRainConfig.useRainGrowthSpeed) return false;
+	public static boolean shouldGrowExtra(Level level, BlockPos blockPos, RandomSource random, CropType cropType) {
+		if (!level.isRainingAt(blockPos) || !CropsLoveRainConfig.useRainGrowthSpeed) return false;
 		if (CropsLoveRainConfig.useIndividualSpeeds) {
 			int growthSpeed = switch (cropType) {
 				case Bamboo -> CropsLoveRainConfig.bambooCustomSpeed;
