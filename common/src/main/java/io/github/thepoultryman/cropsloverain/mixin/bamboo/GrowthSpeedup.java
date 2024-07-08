@@ -29,7 +29,7 @@ public abstract class GrowthSpeedup {
     public void crops_love_rain$extraBlockTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (state.getValue(STAGE) == 0 && level.getBlockState(pos.above()).isAir() && level.getRawBrightness(pos.above(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Bamboo)) {
             int bambooBelow = getHeightBelowUpToMax(level, pos) + 1;
-            if (bambooBelow > 16) {
+            if (bambooBelow < 16) {
                 this.growBamboo(state, level, pos, random, bambooBelow);
                 if (CropsLoveRainConfig.debugMode) {
                     CropsLoveRain.LOGGER.info(this + " grew an extra state.");

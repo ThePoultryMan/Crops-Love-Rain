@@ -16,7 +16,12 @@ public class CropsLoveRain {
 	}
 
 	public static boolean shouldGrowExtra(Level level, BlockPos blockPos, RandomSource random, CropType cropType) {
-		if (!level.isRainingAt(blockPos) || !CropsLoveRainConfig.useRainGrowthSpeed) return false;
+		LOGGER.info("Raining at " + blockPos + "? " + level.isRainingAt(blockPos));
+		if ((!level.isRainingAt(blockPos) && cropType != CropType.Bamboo) || !CropsLoveRainConfig.useRainGrowthSpeed) {
+			return false;
+		} else if (cropType == CropType.Bamboo && !level.isRaining()) {
+			return false;
+		}
 		if (CropsLoveRainConfig.useIndividualSpeeds) {
 			int growthSpeed = switch (cropType) {
 				case Bamboo -> CropsLoveRainConfig.bambooCustomSpeed;
