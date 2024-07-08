@@ -10,5 +10,7 @@
     "cropsloverain.midnightconfig.bambooCustomSpeed": "Bamboo Chance",
     "cropsloverain.midnightconfig.cropsCustomSpeed": "Crops Chance",
     "cropsloverain.midnightconfig.saplingCustomSpeed": "Sapling Chance",
-    "cropsloverain.midnightconfig.sugarCaneCustomSpeed": "Sugar Cane Chance"
+    "cropsloverain.midnightconfig.sugarCaneCustomSpeed": "Sugar Cane Chance",
+    "cropsloverain.midnightconfig.category.debug": "Debug",
+    "cropsloverain.midnightconfig.debugMode": "Enable debug mode"
 }

@@ -4,9 +4,12 @@ import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CropsLoveRain {
 	public static final String MOD_ID = "cropsloverain";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static void init() {
 		CropsLoveRainConfig.init(MOD_ID, CropsLoveRainConfig.class);

@@ -1,6 +1,7 @@
 package io.github.thepoultryman.cropsloverain.mixin;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
+import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -20,6 +21,9 @@ public abstract class SaplingGrowthSpeedup {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.Sapling)) {
             advanceTree(world, pos, state, random);
+            if (CropsLoveRainConfig.debugMode) {
+                CropsLoveRain.LOGGER.info(this + " grew into a tree");
+            }
         }
     }
 }

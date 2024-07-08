@@ -1,6 +1,7 @@
 package io.github.thepoultryman.cropsloverain.mixin;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
+import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -28,17 +29,30 @@ public class SugarCaneGrowthSpeedup extends Block {
 
     @Inject(at = @At("HEAD"), method = "randomTick")
     public void crops_love_rain$sugarCaneExtraTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (level.getBlockState(pos.above()).isAir()) {
+        if (level.isEmptyBlock(pos.above())) {
             int caneBlocks; // Determines how may sugar canes are in a "pillar".
             for (caneBlocks = 1; level.getBlockState(pos.below(caneBlocks)).is(Blocks.SUGAR_CANE); ++caneBlocks);
+
+            if (CropsLoveRainConfig.debugMode) {
+                CropsLoveRain.LOGGER.info("Cane Blocks: " + caneBlocks + " Age: " + state.getValue(AGE));
+            }
 
             if (caneBlocks < 3 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.SugarCane)) {
                 int age = state.getValue(AGE);
                 if (age == 15) {
                     level.setBlockAndUpdate(pos.above(), this.defaultBlockState());               // Creates a sugar cane block above this one.
                     level.setBlock(pos, state.setValue(AGE, 0), Block.UPDATE_INVISIBLE); // Sets this sugar cane's age to 0.
+                    if (CropsLoveRainConfig.debugMode) {
+                        CropsLoveRain.LOGGER.info(this + " grew an extra cane.");
+                    }
                 } else {
+                    if (CropsLoveRainConfig.debugMode) {
+                        CropsLoveRain.LOGGER.info("Age: " + state.getValue(AGE));
+                    }
                     level.setBlock(pos, state.setValue(AGE, 15), Block.UPDATE_INVISIBLE); // Skip to last age.
+                    if (CropsLoveRainConfig.debugMode) {
+                        CropsLoveRain.LOGGER.info(this + " skipped to last age (" + state.getValue(AGE) + ").");
+                    }
                 }
             }
         }

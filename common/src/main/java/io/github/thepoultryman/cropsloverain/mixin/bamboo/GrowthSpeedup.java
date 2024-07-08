@@ -1,6 +1,7 @@
 package io.github.thepoultryman.cropsloverain.mixin.bamboo;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
+import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -30,6 +31,9 @@ public abstract class GrowthSpeedup {
             int bambooBelow = getHeightBelowUpToMax(level, pos) + 1;
             if (bambooBelow > 16) {
                 this.growBamboo(state, level, pos, random, bambooBelow);
+                if (CropsLoveRainConfig.debugMode) {
+                    CropsLoveRain.LOGGER.info(this + " grew an extra state.");
+                }
             }
         }
     }
