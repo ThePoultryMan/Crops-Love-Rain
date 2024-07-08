@@ -38,21 +38,10 @@ public class SugarCaneGrowthSpeedup extends Block {
             }
 
             if (caneBlocks < 3 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.SugarCane)) {
-                int age = state.getValue(AGE);
-                if (age == 15) {
-                    level.setBlockAndUpdate(pos.above(), this.defaultBlockState());               // Creates a sugar cane block above this one.
-                    level.setBlock(pos, state.setValue(AGE, 0), Block.UPDATE_INVISIBLE); // Sets this sugar cane's age to 0.
-                    if (CropsLoveRainConfig.debugMode) {
-                        CropsLoveRain.LOGGER.info(this + " grew an extra cane.");
-                    }
-                } else {
-                    if (CropsLoveRainConfig.debugMode) {
-                        CropsLoveRain.LOGGER.info("Age: " + state.getValue(AGE));
-                    }
-                    level.setBlock(pos, state.setValue(AGE, 15), Block.UPDATE_INVISIBLE); // Skip to last age.
-                    if (CropsLoveRainConfig.debugMode) {
-                        CropsLoveRain.LOGGER.info(this + " skipped to last age (" + state.getValue(AGE) + ").");
-                    }
+                level.setBlockAndUpdate(pos.above(), this.defaultBlockState());               // Creates a sugar cane block above this one.
+                level.setBlock(pos, state.setValue(AGE, 0), Block.UPDATE_INVISIBLE); // Sets this sugar cane's age to 0.
+                if (CropsLoveRainConfig.debugMode) {
+                    CropsLoveRain.LOGGER.info(this + " grew an extra cane.");
                 }
             }
         }
