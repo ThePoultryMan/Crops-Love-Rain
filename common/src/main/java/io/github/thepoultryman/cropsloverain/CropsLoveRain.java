@@ -16,7 +16,6 @@ public class CropsLoveRain {
 	}
 
 	public static boolean shouldGrowExtra(Level level, BlockPos blockPos, RandomSource random, CropType cropType) {
-		LOGGER.info("Raining at " + blockPos + "? " + level.isRainingAt(blockPos));
 		if ((!level.isRainingAt(blockPos) && cropType != CropType.Bamboo) || !CropsLoveRainConfig.useRainGrowthSpeed) {
 			return false;
 		} else if (cropType == CropType.Bamboo && !level.isRaining()) {
