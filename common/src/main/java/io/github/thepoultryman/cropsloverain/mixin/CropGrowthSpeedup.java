@@ -20,15 +20,18 @@ public abstract class CropGrowthSpeedup {
     @Shadow
     public abstract int getAge(BlockState state);
 
-    @Inject(at = @At("HEAD"), method = "randomTick")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
+    public void crops_love_rain$randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (level.getRawBrightness(pos, 0) >= 9) {
             if (this.getAge(state) < 7 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Crop)) {
                 level.setBlock(pos, this.getStateForAge(this.getAge(state) + 1), 2);
                 if (CropsLoveRainConfig.debugMode) {
-                    CropsLoveRain.LOGGER.info(this + " grew an extra state.");
+                    CropsLoveRain.LOGGER.info("{} grew an extra state.", this);
                 }
             }
+        }
+        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+            ci.cancel();
         }
     }
 }

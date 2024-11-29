@@ -12,5 +12,7 @@
     "cropsloverain.midnightconfig.saplingCustomSpeed": "Sapling Chance",
     "cropsloverain.midnightconfig.sugarCaneCustomSpeed": "Sugar Cane Chance",
     "cropsloverain.midnightconfig.category.debug": "Debug",
-    "cropsloverain.midnightconfig.debugMode": "Enable debug mode"
+    "cropsloverain.midnightconfig.debugMode": "Enable debug mode",
+    "cropsloverain.midnightconfig.haltRegularGrowth": "Halt Regular Growth",
+    "cropsloverain.midnightconfig.haltRegularGrowth.tooltip": "Completely stops the vanilla growth mechanics for all supported crops.\nUse to test whether plants are being grown by rain.\n\nDoes nothing if debug mode is disabled."
 }

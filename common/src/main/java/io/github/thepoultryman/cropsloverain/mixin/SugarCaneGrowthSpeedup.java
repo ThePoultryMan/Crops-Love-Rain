@@ -27,23 +27,26 @@ public class SugarCaneGrowthSpeedup extends Block {
 
     @Shadow @Final public static IntegerProperty AGE;
 
-    @Inject(at = @At("HEAD"), method = "randomTick")
+    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
     public void crops_love_rain$sugarCaneExtraTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (level.isEmptyBlock(pos.above())) {
             int caneBlocks; // Determines how may sugar canes are in a "pillar".
             for (caneBlocks = 1; level.getBlockState(pos.below(caneBlocks)).is(Blocks.SUGAR_CANE); ++caneBlocks);
 
             if (CropsLoveRainConfig.debugMode) {
-                CropsLoveRain.LOGGER.info("Cane Blocks: " + caneBlocks + " Age: " + state.getValue(AGE));
+                CropsLoveRain.LOGGER.info("Cane Blocks: {} Age: {}", caneBlocks, state.getValue(AGE));
             }
 
             if (caneBlocks < 3 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.SugarCane)) {
                 level.setBlockAndUpdate(pos.above(), this.defaultBlockState());               // Creates a sugar cane block above this one.
                 level.setBlock(pos, state.setValue(AGE, 0), Block.UPDATE_INVISIBLE); // Sets this sugar cane's age to 0.
                 if (CropsLoveRainConfig.debugMode) {
-                    CropsLoveRain.LOGGER.info(this + " grew an extra cane.");
+                    CropsLoveRain.LOGGER.info("{} grew an extra cane.", this);
                 }
             }
+        }
+        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+            ci.cancel();
         }
     }
 }

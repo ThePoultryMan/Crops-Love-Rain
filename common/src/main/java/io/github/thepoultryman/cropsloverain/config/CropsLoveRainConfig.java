@@ -25,4 +25,6 @@ public class CropsLoveRainConfig extends MidnightConfig {
 
     @Entry(category = "debug")
     public static boolean debugMode = false;
+    @Entry(category = "debug")
+    public static boolean haltRegularGrowth = false;
 }

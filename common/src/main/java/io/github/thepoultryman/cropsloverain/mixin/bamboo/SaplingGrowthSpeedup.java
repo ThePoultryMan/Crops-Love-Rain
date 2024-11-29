@@ -18,13 +18,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SaplingGrowthSpeedup {
     @Shadow protected abstract void growBamboo(Level level, BlockPos pos);
 
-    @Inject(at = @At("TAIL"), method = "randomTick")
+    @Inject(at = @At("TAIL"), method = "randomTick", cancellable = true)
     public void crops_love_rain$extraSaplingTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (level.getBlockState(pos.above()).isAir() && level.getRawBrightness(pos.above(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Bamboo)) {
             this.growBamboo(level, pos);
             if (CropsLoveRainConfig.debugMode) {
-                CropsLoveRain.LOGGER.info(this + " grew an extra state.");
+                CropsLoveRain.LOGGER.info("{} grew an extra state.", this);
             }
+        }
+        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+            ci.cancel();
         }
     }
 }

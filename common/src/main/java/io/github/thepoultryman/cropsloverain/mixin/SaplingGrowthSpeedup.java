@@ -17,13 +17,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SaplingGrowthSpeedup {
     @Shadow public abstract void advanceTree(ServerLevel level, BlockPos pos, BlockState state, RandomSource random);
 
-    @Inject(at = @At("TAIL"), method = "randomTick")
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
+    @Inject(at = @At("TAIL"), method = "randomTick", cancellable = true)
+    public void crops_love_rain$randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.Sapling)) {
             advanceTree(world, pos, state, random);
             if (CropsLoveRainConfig.debugMode) {
-                CropsLoveRain.LOGGER.info(this + " grew into a tree");
+                CropsLoveRain.LOGGER.info("{} grew into a tree", this);
             }
+        }
+        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+            ci.cancel();
         }
     }
 }
