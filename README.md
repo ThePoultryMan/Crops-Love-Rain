@@ -9,6 +9,7 @@ These crops include:
 * Bamboo
 * Saplings
 * Sugar Cane
+* Sweet Berries
 
 ## Configuration
 _Updated as of 1.5.0_

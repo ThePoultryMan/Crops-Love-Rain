@@ -27,6 +27,7 @@ public class CropsLoveRain {
 				case Crop -> CropsLoveRainConfig.cropsCustomSpeed;
 				case Sapling -> CropsLoveRainConfig.saplingCustomSpeed;
 				case SugarCane -> CropsLoveRainConfig.sugarCaneCustomSpeed;
+				case SweetBerries -> CropsLoveRainConfig.sweetBerryCustomSpeed;
 			};
 			return random.nextInt(growthSpeed) == 0;
 		} else {
@@ -39,5 +40,6 @@ public class CropsLoveRain {
 		Crop,
 		Sapling,
 		SugarCane,
+		SweetBerries,
 	}
 }
