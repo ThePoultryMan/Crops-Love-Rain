@@ -24,7 +24,7 @@ public class CropsLoveRainConfig extends MidnightConfig {
     public static int saplingCustomSpeed = 10;
     @Entry(category = "individual", min = 0)
     public static int sugarCaneCustomSpeed = 10;
-    @Entry(category = "individual")
+    @Entry(category = "individual", min = 0)
     public static int sweetBerryCustomSpeed = 10;
 
     @Entry(category = "debug")
