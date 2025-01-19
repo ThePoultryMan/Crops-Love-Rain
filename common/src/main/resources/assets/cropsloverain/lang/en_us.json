@@ -6,7 +6,7 @@
     "cropsloverain.midnightconfig.rainGrowthSpeed": "Rain Growth Chance",
     "cropsloverain.midnightconfig.category.individual": "Individual",
     "cropsloverain.midnightconfig.useIndividualSpeeds": "Use Individual Speeds",
-    "cropsloverain.midnightconfig.chanceDescriptionIndividual": "The chance describes a 1 out of x chance that a crop will grow extra each tick.",
+    "cropsloverain.midnightconfig.chanceDescriptionIndividual": "The chance describes a 1 out of x chance that a crop will grow extra each tick.\nSet to 0 to disable speed up for that crop.",
     "cropsloverain.midnightconfig.bambooCustomSpeed": "Bamboo Chance",
     "cropsloverain.midnightconfig.cocoaCustomSpeed": "Cocoa Chance",
     "cropsloverain.midnightconfig.cropsCustomSpeed": "Crops Chance",

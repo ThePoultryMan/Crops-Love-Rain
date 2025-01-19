@@ -21,15 +21,19 @@ public class CropsLoveRain {
 		} else if (cropType == CropType.Bamboo && !level.isRaining()) {
 			return false;
 		}
+		int growthSpeed = switch (cropType) {
+			case Bamboo -> CropsLoveRainConfig.bambooCustomSpeed;
+			case Cocoa -> CropsLoveRainConfig.cocoaCustomSpeed;
+			case Crop -> CropsLoveRainConfig.cropsCustomSpeed;
+			case Sapling -> CropsLoveRainConfig.saplingCustomSpeed;
+			case SugarCane -> CropsLoveRainConfig.sugarCaneCustomSpeed;
+			case SweetBerries -> CropsLoveRainConfig.sweetBerryCustomSpeed;
+		};
+		if (growthSpeed == 0) {
+			return false;
+		}
 		if (CropsLoveRainConfig.useIndividualSpeeds) {
-			int growthSpeed = switch (cropType) {
-				case Bamboo -> CropsLoveRainConfig.bambooCustomSpeed;
-				case Cocoa -> CropsLoveRainConfig.cocoaCustomSpeed;
-				case Crop -> CropsLoveRainConfig.cropsCustomSpeed;
-				case Sapling -> CropsLoveRainConfig.saplingCustomSpeed;
-				case SugarCane -> CropsLoveRainConfig.sugarCaneCustomSpeed;
-				case SweetBerries -> CropsLoveRainConfig.sweetBerryCustomSpeed;
-			};
+
 			return random.nextInt(growthSpeed) == 0;
 		} else {
 			return random.nextInt(CropsLoveRainConfig.rainGrowthSpeed) == 0;
