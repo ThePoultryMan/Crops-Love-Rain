@@ -8,6 +8,7 @@
     "cropsloverain.midnightconfig.useIndividualSpeeds": "Use Individual Speeds",
     "cropsloverain.midnightconfig.chanceDescriptionIndividual": "The chance describes a 1 out of x chance that a crop will grow extra each tick.",
     "cropsloverain.midnightconfig.bambooCustomSpeed": "Bamboo Chance",
+    "cropsloverain.midnightconfig.cocoaCustomSpeed": "Cocoa Chance",
     "cropsloverain.midnightconfig.cropsCustomSpeed": "Crops Chance",
     "cropsloverain.midnightconfig.saplingCustomSpeed": "Sapling Chance",
     "cropsloverain.midnightconfig.sugarCaneCustomSpeed": "Sugar Cane Chance",

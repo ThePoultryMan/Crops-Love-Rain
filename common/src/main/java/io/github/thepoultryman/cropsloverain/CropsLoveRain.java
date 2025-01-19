@@ -24,6 +24,7 @@ public class CropsLoveRain {
 		if (CropsLoveRainConfig.useIndividualSpeeds) {
 			int growthSpeed = switch (cropType) {
 				case Bamboo -> CropsLoveRainConfig.bambooCustomSpeed;
+				case Cocoa -> CropsLoveRainConfig.cocoaCustomSpeed;
 				case Crop -> CropsLoveRainConfig.cropsCustomSpeed;
 				case Sapling -> CropsLoveRainConfig.saplingCustomSpeed;
 				case SugarCane -> CropsLoveRainConfig.sugarCaneCustomSpeed;
@@ -37,6 +38,7 @@ public class CropsLoveRain {
 
 	public enum CropType {
 		Bamboo,
+		Cocoa,
 		Crop,
 		Sapling,
 		SugarCane,

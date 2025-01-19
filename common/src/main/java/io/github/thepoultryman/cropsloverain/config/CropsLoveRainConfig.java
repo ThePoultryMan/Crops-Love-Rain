@@ -17,6 +17,8 @@ public class CropsLoveRainConfig extends MidnightConfig {
     @Entry(category = "individual", min = 1)
     public static int bambooCustomSpeed = 10;
     @Entry(category = "individual", min = 1)
+    public static int cocoaCustomSpeed = 10;
+    @Entry(category = "individual", min = 1)
     public static int cropsCustomSpeed = 10;
     @Entry(category = "individual", min = 1)
     public static int saplingCustomSpeed = 10;
