@@ -28,6 +28,13 @@ public class CropsLoveRain {
 			case Sapling -> CropsLoveRainConfig.saplingCustomSpeed;
 			case SugarCane -> CropsLoveRainConfig.sugarCaneCustomSpeed;
 			case SweetBerries -> CropsLoveRainConfig.sweetBerryCustomSpeed;
+			case Melon, Pumpkin -> {
+				if (CropsLoveRainConfig.separateStemSpeed) {
+					yield cropType == CropType.Melon ? CropsLoveRainConfig.melonCustomSpeed : CropsLoveRainConfig.pumpkinCustomSpeed;
+				} else {
+					yield CropsLoveRainConfig.cropsCustomSpeed;
+				}
+			}
 		};
 		if (growthSpeed == 0) {
 			return false;
@@ -47,5 +54,7 @@ public class CropsLoveRain {
 		Sapling,
 		SugarCane,
 		SweetBerries,
+		Melon,
+		Pumpkin
 	}
 }
