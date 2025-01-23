@@ -32,7 +32,12 @@ public abstract class StemBlockGrowthSpeedup extends BushBlock {
 
     @Inject(at = @At("HEAD"), method = "randomTick")
     private void crops_love_rain$randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
-        CropsLoveRain.CropType cropType = blockState.getBlockHolder().is(MELON_LOCATION) ? CropsLoveRain.CropType.Melon : CropsLoveRain.CropType.Pumpkin;
+        CropsLoveRain.CropType cropType;
+        if (CropsLoveRainConfig.separateStemSpeed) {
+            cropType = blockState.getBlockHolder().is(MELON_LOCATION) ? CropsLoveRain.CropType.Melon : CropsLoveRain.CropType.Pumpkin;
+        } else {
+            cropType = CropsLoveRain.CropType.Crop;
+        }
         if (CropsLoveRain.shouldGrowExtra(serverLevel, blockPos, randomSource, cropType)) {
             crops_Love_Rain$extraGrowth += 1;
         }
