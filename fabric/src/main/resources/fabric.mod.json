@@ -5,7 +5,9 @@
 
   "name": "Crops Love Rain",
   "description": "Makes crops grow faster when it's raining.",
-  "authors": [],
+  "authors": [
+    "ThePoultryMan"
+  ],
   "contact": {},
 
   "license": "MIT",
@@ -21,8 +23,8 @@
       "cropsloverain-common.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.9",
-    "minecraft": "1.21.3",
-    "fabric-api": ">=0.110.0+1.21.3"
+    "fabricloader": ">=0.16.10",
+    "minecraft": ">=1.21.4",
+    "fabric-api": ">=0.115.0+1.21.4"
   }
 }
