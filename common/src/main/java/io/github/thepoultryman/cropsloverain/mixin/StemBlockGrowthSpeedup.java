@@ -19,16 +19,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(StemBlock.class)
-public abstract class StemBlockGrowthSpeedup extends BushBlock {
+public abstract class StemBlockGrowthSpeedup {
     @Unique
     private int crops_Love_Rain$extraGrowth;
     @Unique
     private static final ResourceLocation MELON_LOCATION = ResourceLocation.withDefaultNamespace("melon_stem");
-
-    protected StemBlockGrowthSpeedup(Properties properties) {
-        super(properties);
-        throw new AssertionError("This constructor should not be called.");
-    }
 
     @Inject(at = @At("HEAD"), method = "randomTick")
     private void crops_love_rain$randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
