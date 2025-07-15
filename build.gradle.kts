@@ -8,6 +8,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 val minecraft = property("deps.minecraft") as String
+val fabricLoaderVersionO = "0.16.14"
 
 modstitch {
     minecraftVersion = minecraft
@@ -33,11 +34,17 @@ modstitch {
         replacementProperties.populate {
             put("mod_issue_tracker", "https://github.com/ThePoultryMan/Crops-Love-Rain/issues")
             put("midnightlib_version", property("deps.midnightlib_version") as String)
+            if (modstitch.isLoom) {
+                put("loader_version", fabricLoaderVersionO)
+                put("fabric_api_version", property("deps.fabric_api_version") as String)
+            } else {
+                put("loader_version", property("deps.neoforge") as String)
+            }
         }
     }
 
     loom {
-        fabricLoaderVersion = "0.16.14"
+        fabricLoaderVersion = fabricLoaderVersionO
 
         configureLoom {}
     }
