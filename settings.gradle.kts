@@ -8,11 +8,6 @@ pluginManagement {
             name = "NeoForged"
             url = uri("https://maven.neoforged.net/releases/")
         }
-        // temporary because neomaven is offline
-        maven {
-            name = "NeoForged Temp"
-            url = uri("https://maven.creeperhost.net/")
-        }
         gradlePluginPortal()
     }
 }
