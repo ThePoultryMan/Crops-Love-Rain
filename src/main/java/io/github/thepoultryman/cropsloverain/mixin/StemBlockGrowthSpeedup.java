@@ -4,11 +4,12 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
 import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.StemBlock;
-import net.minecraft.world.level.block.VegetationBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,16 +19,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(StemBlock.class)
-public abstract class StemBlockGrowthSpeedup extends VegetationBlock {
+public abstract class StemBlockGrowthSpeedup {
     @Unique
     private int crops_Love_Rain$extraGrowth;
     @Unique
     private static final ResourceLocation MELON_LOCATION = ResourceLocation.withDefaultNamespace("melon_stem");
-
-    protected StemBlockGrowthSpeedup(Properties properties) {
-        super(properties);
-        throw new AssertionError("This constructor should not be called.");
-    }
 
     @Inject(at = @At("HEAD"), method = "randomTick")
     private void crops_love_rain$randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
