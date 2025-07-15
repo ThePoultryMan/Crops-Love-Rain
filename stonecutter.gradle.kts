@@ -8,6 +8,11 @@ stonecutter registerChiseled tasks.register("chiseledBuild", stonecutter.chisele
     ofTask("build")
 }
 
+stonecutter registerChiseled tasks.register("chiseledPublishMod", stonecutter.chiseled) {
+    group = "project"
+    ofTask("publishMods")
+}
+
 tasks.register("runCurrentClient") {
     stonecutter.current.run {
         dependsOn(":$project:runClient")
