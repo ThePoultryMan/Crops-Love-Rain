@@ -93,8 +93,6 @@ dependencies {
     )
 }
 
-// Runs 2+? times when using chiseled publish, so um...
-// TODO: Fix that
 publishMods {
     if (modstitch.isLoom) {
         file.set(tasks.named<RemapJarTask>("remapJar").get().archiveFile)
