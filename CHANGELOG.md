@@ -1,6 +1,5 @@
 ## Internal
-* refactor: switch to stonecutter & modstitch
-* refactor: use mod publish gradle plugin
+* refactor: dependency adjustments
 
 ## Changes
-* feat: 1.21.7 support
+* feat: 1.21.8 support

@@ -1,5 +1,5 @@
 //? if neoforge {
-package io.github.thepoultryman.cropsloverain.neoforge;
+/*package io.github.thepoultryman.cropsloverain.neoforge;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
 import net.neoforged.fml.common.Mod;
@@ -10,4 +10,4 @@ public class CropsLoveRainNeoForge {
         CropsLoveRain.init();
     }
 }
-//?}
+*///?}

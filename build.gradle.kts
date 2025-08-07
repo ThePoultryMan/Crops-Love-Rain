@@ -1,7 +1,7 @@
 import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
-    id("dev.isxander.modstitch.base") version "0.5.14-unstable"
+    id("dev.isxander.modstitch.base") version "0.7.0-unstable"
     id("me.modmuss50.mod-publish-plugin") version("0.8.4")
 }
 
@@ -15,8 +15,6 @@ val fabricLoaderVersionO = "0.16.14"
 
 modstitch {
     minecraftVersion = minecraft
-
-    javaTarget = 21
 
     parchment {
         prop("deps.parchment") { mappingsVersion = it }
@@ -36,10 +34,16 @@ modstitch {
 
         replacementProperties.populate {
             put("mod_issue_tracker", "https://github.com/ThePoultryMan/Crops-Love-Rain/issues")
+            var minimumMinecraftVersion = if (property("deps.minecraft_min") != null) {
+                property("deps.minecraft_min") as String
+            } else {
+                minecraftVersion
+            }
+            put("minecraft_min_version", minimumMinecraftVersion as String)
             put("midnightlib_version", property("deps.midnightlib_version") as String)
             if (modstitch.isLoom) {
                 put("loader_version", fabricLoaderVersionO)
-                put("fabric_api_version", property("deps.fabric_api_version") as String)
+                put("fabric_api_version", property("deps.req_fabric_api_version") as String)
             } else {
                 put("loader_version", property("deps.neoforge") as String)
             }
@@ -53,19 +57,9 @@ modstitch {
     }
 
     moddevgradle {
-        enable {
-            prop("deps.neoform") { neoFormVersion = it }
-            prop("deps.neoforge") { neoForgeVersion = it }
-            prop("deps.mcp") { mcpVersion = it }
-        }
+        prop("deps.neoforge") { neoForgeVersion = it }
 
         defaultRuns()
-
-        configureNeoforge {
-            runs.all {
-                disableIdeRun()
-            }
-        }
     }
 
     mixin {
@@ -77,11 +71,11 @@ modstitch {
 
 var constraint: String = name.split("-")[1]
 stonecutter {
-    consts(
-        "fabric" to constraint.equals("fabric"),
-        "neoforge" to constraint.equals("neoforge"),
-        "forge" to constraint.equals("forge"),
-        "vanilla" to constraint.equals("vanilla")
+    constants += arrayOf(
+        "fabric" to (constraint == "fabric"),
+        "neoforge" to (constraint == "neoforge"),
+        "forge" to (constraint == "forge"),
+        "vanilla" to (constraint == "vanilla")
     )
 }
 
@@ -94,7 +88,9 @@ dependencies {
     } else {
         "neoforge"
     }
-    modstitchModImplementation("maven.modrinth:midnightlib:${property("deps.midnightlib_version")}+${minecraft}-${loader}")
+    modstitchModImplementation(
+        "maven.modrinth:midnightlib:${property("deps.midnightlib_version")}+${property("deps.minecraft_min")}-${loader}"
+    )
 }
 
 // Runs 2+? times when using chiseled publish, so um...
@@ -106,9 +102,9 @@ publishMods {
         file.set(tasks.jar.get().archiveFile)
     }
 
-    var maxMinecraftVersion = findProperty("deps.minecraft_max") as String?
-    var versionRange = if (maxMinecraftVersion != null) {
-        "${minecraft}-${maxMinecraftVersion}"
+    var minMinecraftVersion = findProperty("deps.minecraft_min") as String?
+    var versionRange = if (minMinecraftVersion != null) {
+        "${minMinecraftVersion}-${minecraft}"
     } else {
         minecraft
     }
@@ -133,10 +129,10 @@ publishMods {
 
         projectDescription.set(providers.fileContents(layout.projectDirectory.file("README.md")).asText)
 
-        if (maxMinecraftVersion != null) {
+        if (minMinecraftVersion != null) {
             minecraftVersionRange {
-                start = minecraft
-                end = maxMinecraftVersion
+                start = minMinecraftVersion
+                end = minecraft
             }
         } else {
             minecraftVersions.add(minecraft)
@@ -152,10 +148,10 @@ publishMods {
         accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         projectId = "580294"
 
-        if (maxMinecraftVersion != null) {
+        if (minMinecraftVersion != null) {
             minecraftVersionRange {
-                start = minecraft
-                end = maxMinecraftVersion
+                start = minMinecraftVersion
+                end = minecraft
             }
         } else {
             minecraftVersions.add(minecraft)
