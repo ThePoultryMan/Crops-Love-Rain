@@ -1,7 +1,6 @@
 package io.github.thepoultryman.cropsloverain.mixin;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
-import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -24,12 +23,12 @@ public abstract class CocoaGrowthSpeedup {
         int age = blockState.getValue(AGE);
         if (age < 2 && CropsLoveRain.shouldGrowExtra(serverLevel, blockPos, randomSource, CropsLoveRain.CropType.Cocoa)) {
             serverLevel.setBlock(blockPos, blockState.setValue(AGE, age + 1), 2);
-            if (CropsLoveRainConfig.debugMode) {
+            if (CropsLoveRain.CONFIG.debugMode.get()) {
                 CropsLoveRain.LOGGER.info("{} grew an extra state.", this);
             }
         }
 
-        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+        if (CropsLoveRain.CONFIG.debugMode.get() && CropsLoveRain.CONFIG.haltRegularGrowth.get()) {
             ci.cancel();
         }
     }

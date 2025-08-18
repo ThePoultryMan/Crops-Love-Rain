@@ -2,13 +2,10 @@ package io.github.thepoultryman.cropsloverain.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
-import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Debug;
@@ -28,7 +25,7 @@ public abstract class StemBlockGrowthSpeedup {
     @Inject(at = @At("HEAD"), method = "randomTick")
     private void crops_love_rain$randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
         CropsLoveRain.CropType cropType;
-        if (CropsLoveRainConfig.separateStemSpeed) {
+        if (CropsLoveRain.CONFIG.separateStemSpeed.get()) {
             cropType = blockState.getBlockHolder().is(MELON_LOCATION) ? CropsLoveRain.CropType.Melon : CropsLoveRain.CropType.Pumpkin;
         } else {
             cropType = CropsLoveRain.CropType.Crop;
@@ -41,7 +38,7 @@ public abstract class StemBlockGrowthSpeedup {
     @Debug(export = true)
     @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"), method = "randomTick")
     private int crops_love_rain$randomTickCheck(int original) {
-        boolean haltGrowth = CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth;
+        boolean haltGrowth = CropsLoveRain.CONFIG.debugMode.get() && CropsLoveRain.CONFIG.haltRegularGrowth.get();
         if (haltGrowth) {
             if (crops_Love_Rain$extraGrowth > 0) {
                 crops_Love_Rain$extraGrowth -= 1;

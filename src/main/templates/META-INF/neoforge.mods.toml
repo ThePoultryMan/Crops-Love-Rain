@@ -68,7 +68,3 @@ mandatory = true
 versionRange = "[${minecraft_min_version},)"
 ordering = "NONE"
 side = "BOTH"
-[[dependencies.${mod_id}]]
-modId = "midnightlib"
-mandatory = true
-versionRange = "[${midnightlib_version},)"

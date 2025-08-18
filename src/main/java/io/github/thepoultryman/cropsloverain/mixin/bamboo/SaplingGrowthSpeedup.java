@@ -1,7 +1,6 @@
 package io.github.thepoultryman.cropsloverain.mixin.bamboo;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
-import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -22,11 +21,11 @@ public abstract class SaplingGrowthSpeedup {
     public void crops_love_rain$extraSaplingTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (level.getBlockState(pos.above()).isAir() && level.getRawBrightness(pos.above(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Bamboo)) {
             this.growBamboo(level, pos);
-            if (CropsLoveRainConfig.debugMode) {
+            if (CropsLoveRain.CONFIG.debugMode.get()) {
                 CropsLoveRain.LOGGER.info("{} grew an extra state.", this);
             }
         }
-        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+        if (CropsLoveRain.CONFIG.debugMode.get() && CropsLoveRain.CONFIG.haltRegularGrowth.get()) {
             ci.cancel();
         }
     }

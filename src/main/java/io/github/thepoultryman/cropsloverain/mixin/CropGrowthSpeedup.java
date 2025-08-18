@@ -1,7 +1,6 @@
 package io.github.thepoultryman.cropsloverain.mixin;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
-import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -25,12 +24,12 @@ public abstract class CropGrowthSpeedup {
         if (level.getRawBrightness(pos, 0) >= 9) {
             if (this.getAge(state) < 7 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Crop)) {
                 level.setBlock(pos, this.getStateForAge(this.getAge(state) + 1), 2);
-                if (CropsLoveRainConfig.debugMode) {
+                if (CropsLoveRain.CONFIG.debugMode.get()) {
                     CropsLoveRain.LOGGER.info("{} grew an extra state.", this);
                 }
             }
         }
-        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+        if (CropsLoveRain.CONFIG.debugMode.get() && CropsLoveRain.CONFIG.haltRegularGrowth.get()) {
             ci.cancel();
         }
     }

@@ -37,13 +37,13 @@ modstitch {
             var minimumMinecraftVersion = if (property("deps.minecraft_min") != null) {
                 property("deps.minecraft_min") as String
             } else {
-                minecraftVersion
+                minecraftVersion.toString()
             }
-            put("minecraft_min_version", minimumMinecraftVersion as String)
-            put("midnightlib_version", property("deps.midnightlib_version") as String)
+            put("minecraft_min_version", minimumMinecraftVersion)
             if (modstitch.isLoom) {
                 put("loader_version", fabricLoaderVersionO)
                 put("fabric_api_version", property("deps.req_fabric_api_version") as String)
+                put("forge_config_api_port_version", property("deps.forge_config_api_port") as String)
             } else {
                 put("loader_version", property("deps.neoforge") as String)
             }
@@ -79,18 +79,23 @@ stonecutter {
     )
 }
 
+repositories {
+    maven {
+        name = "Fuzs Mod Resources"
+        url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
+    }
+    maven {
+        name = "Terraformers"
+        url = uri("https://maven.terraformersmc.com/")
+    }
+}
+
 dependencies {
     modstitch.loom {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api_version") as String}")
+        modstitchModApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${property("deps.forge_config_api_port")}")
+        modstitchModLocalRuntime("com.terraformersmc:modmenu:${property("deps.mod_menu")}")
     }
-    var loader = if (modstitch.isLoom) {
-        "fabric"
-    } else {
-        "neoforge"
-    }
-    modstitchModImplementation(
-        "maven.modrinth:midnightlib:${property("deps.midnightlib_version")}+${property("deps.minecraft_min")}-${loader}"
-    )
 }
 
 publishMods {
@@ -138,8 +143,8 @@ publishMods {
 
         if (modstitch.isLoom) {
             requires("fabric-api")
+            requires("forge-config-api-port")
         }
-        requires("midnightlib")
     }
 
     curseforge {
@@ -157,7 +162,7 @@ publishMods {
 
         if (modstitch.isLoom) {
             requires("fabric-api")
+            requires("forge-config-api-port-fabric")
         }
-        requires("midnightlib")
     }
 }

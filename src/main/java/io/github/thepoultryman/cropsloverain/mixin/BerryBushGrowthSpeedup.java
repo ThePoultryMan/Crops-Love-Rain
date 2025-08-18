@@ -1,7 +1,6 @@
 package io.github.thepoultryman.cropsloverain.mixin;
 
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
-import io.github.thepoultryman.cropsloverain.config.CropsLoveRainConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -28,7 +27,7 @@ public class BerryBushGrowthSpeedup {
             serverLevel.setBlock(blockPos, newBlockState, 2);
             serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(newBlockState));
         }
-        if (CropsLoveRainConfig.debugMode && CropsLoveRainConfig.haltRegularGrowth) {
+        if (CropsLoveRain.CONFIG.debugMode.get() && CropsLoveRain.CONFIG.haltRegularGrowth.get()) {
             ci.cancel();
         }
     }

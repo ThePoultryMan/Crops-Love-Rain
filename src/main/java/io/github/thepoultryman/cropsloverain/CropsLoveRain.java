@@ -11,34 +11,33 @@ public class CropsLoveRain {
 	public static final String MOD_ID = "cropsloverain";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static void init() {
-		CropsLoveRainConfig.init(MOD_ID, CropsLoveRainConfig.class);
-	}
+    public static final CropsLoveRainConfig CONFIG = CropsLoveRainConfig.INSTANCE;
+
 
 	public static boolean shouldGrowExtra(Level level, BlockPos blockPos, RandomSource random, CropType cropType) {
-		if ((!level.isRainingAt(blockPos) && cropType != CropType.Bamboo) || !CropsLoveRainConfig.useRainGrowthSpeed) {
+		if ((!level.isRainingAt(blockPos) && cropType != CropType.Bamboo) || !CONFIG.useRainGrowthSpeed.get()) {
 			return false;
 		} else if (cropType == CropType.Bamboo && !level.isRaining()) {
 			return false;
 		}
 		int growthSpeed = switch (cropType) {
-			case Bamboo -> CropsLoveRainConfig.bambooCustomSpeed;
-			case Cocoa -> CropsLoveRainConfig.cocoaCustomSpeed;
-			case Crop -> CropsLoveRainConfig.cropsCustomSpeed;
-			case Sapling -> CropsLoveRainConfig.saplingCustomSpeed;
-			case SugarCane -> CropsLoveRainConfig.sugarCaneCustomSpeed;
-			case SweetBerries -> CropsLoveRainConfig.sweetBerryCustomSpeed;
-			case Melon -> CropsLoveRainConfig.melonCustomSpeed;
-			case Pumpkin -> CropsLoveRainConfig.pumpkinCustomSpeed;
+			case Bamboo -> CONFIG.bambooCustomSpeed.get();
+			case Cocoa -> CONFIG.cocoaCustomSpeed.get();
+			case Crop -> CONFIG.cropsCustomSpeed.get();
+			case Sapling -> CONFIG.saplingCustomSpeed.get();
+			case SugarCane -> CONFIG.sugarCaneCustomSpeed.get();
+			case SweetBerries -> CONFIG.sweetBerryCustomSpeed.get();
+			case Melon -> CONFIG.melonCustomSpeed.get();
+			case Pumpkin -> CONFIG.pumpkinCustomSpeed.get();
 		};
 		if (growthSpeed == 0) {
 			return false;
 		}
-		if (CropsLoveRainConfig.useIndividualSpeeds) {
+		if (CONFIG.useIndividualSpeeds.get()) {
 
 			return random.nextInt(growthSpeed) == 0;
 		} else {
-			return random.nextInt(CropsLoveRainConfig.rainGrowthSpeed) == 0;
+			return random.nextInt(CONFIG.rainGrowthSpeed.get()) == 0;
 		}
 	}
 
