@@ -1,8 +1,4 @@
-**CONFIGS MUST BE MANUALLY MIGRATED**
+## Fixes
 
-## Changes
-* refactor: switch to Forge Config API Port
-* feat: 1.21.8 support
-
-## Internal
-* refactor: dependency adjustments
+* Fixes [#12](https://github.com/ThePoultryMan/Crops-Love-Rain/issues/12). Now
+  requires the correct version of Forge Config API Port.

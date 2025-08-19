@@ -22,7 +22,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "minecraft": ">=${minecraft_min_version}",
-    "forgeconfigapiport": ">=${forge_config_api_port_version}",
+    "forgeconfigapiport": ">=${forge_config_api_port_min_version}",
     "fabric-api": ">=${fabric_api_version}"
   }
 }

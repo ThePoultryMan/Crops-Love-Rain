@@ -43,7 +43,7 @@ modstitch {
             if (modstitch.isLoom) {
                 put("loader_version", fabricLoaderVersionO)
                 put("fabric_api_version", property("deps.req_fabric_api_version") as String)
-                put("forge_config_api_port_version", property("deps.forge_config_api_port") as String)
+                put("forge_config_api_port_min_version", property("deps.forge_config_api_port_min") as String)
             } else {
                 put("loader_version", property("deps.neoforge") as String)
             }
