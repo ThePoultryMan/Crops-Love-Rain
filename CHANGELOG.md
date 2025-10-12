@@ -1,4 +1,7 @@
+## Changes
+
+* Port to 1.21.9 and 1.21.10
+
 ## Fixes
 
-* Fixes [#12](https://github.com/ThePoultryMan/Crops-Love-Rain/issues/12). Now
-  requires the correct version of Forge Config API Port.
+* fix: now properly runs on older versions of NeoForge

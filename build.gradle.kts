@@ -1,7 +1,7 @@
 import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
-    id("dev.isxander.modstitch.base") version "0.7.0-unstable"
+    id("dev.isxander.modstitch.base") version "0.7.1-unstable"
     id("me.modmuss50.mod-publish-plugin") version("0.8.4")
 }
 
@@ -11,7 +11,7 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
 }
 
 val minecraft = property("deps.minecraft") as String
-val fabricLoaderVersionO = "0.16.14"
+val fabricLoaderVersionO = "0.17.3"
 
 modstitch {
     minecraftVersion = minecraft
@@ -40,12 +40,10 @@ modstitch {
                 minecraftVersion.toString()
             }
             put("minecraft_min_version", minimumMinecraftVersion)
+            put("loader_version", property("deps.loader_version_min") as String)
             if (modstitch.isLoom) {
-                put("loader_version", fabricLoaderVersionO)
                 put("fabric_api_version", property("deps.req_fabric_api_version") as String)
                 put("forge_config_api_port_min_version", property("deps.forge_config_api_port_min") as String)
-            } else {
-                put("loader_version", property("deps.neoforge") as String)
             }
         }
     }
