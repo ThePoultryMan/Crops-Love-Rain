@@ -1,8 +1,8 @@
-import net.fabricmc.loom.task.RemapJarTask
+import net.fabricmc.loom.task.RemapJarTask;
 
 plugins {
-    id("dev.isxander.modstitch.base") version "0.7.1-unstable"
-    id("me.modmuss50.mod-publish-plugin") version("0.8.4")
+    id("dev.isxander.modstitch.base") version "0.8.0"
+    id("me.modmuss50.mod-publish-plugin") version("1.1.0")
 }
 
 fun prop(name: String, consumer: (prop: String) -> Unit) {
@@ -10,8 +10,11 @@ fun prop(name: String, consumer: (prop: String) -> Unit) {
         ?.let(consumer)
 }
 
-val minecraft = property("deps.minecraft") as String
-val fabricLoaderVersionO = "0.17.3"
+val minecraft = if (property("deps.minecraft")?.equals("latest") == true) {
+    property("latest_minecraft") as String
+} else {
+    property("deps.minecraft") as String
+}
 
 modstitch {
     minecraftVersion = minecraft
@@ -22,45 +25,59 @@ modstitch {
 
     metadata {
         modId = "cropsloverain"
-        modName = property("mod.name") as String
+        prop("mod.name") { modName = it }
         modDescription = "Makes crops grow faster when it's raining."
-        modVersion = property("mod.version") as String
+        prop("mod.version") { modVersion = it }
         modGroup = "io.github.thepoultryman"
         modAuthor = "ThePoultryMan"
 
-        fun <K, V> MapProperty<K, V>.populate(block: MapProperty<K, V>.() -> Unit) {
+        fun <K: Any, V: Any> MapProperty<K, V>.populate(block: MapProperty<K, V>.() -> Unit) {
             block()
         }
 
         replacementProperties.populate {
             put("mod_issue_tracker", "https://github.com/ThePoultryMan/Crops-Love-Rain/issues")
-            var minimumMinecraftVersion = if (property("deps.minecraft_min") != null) {
-                property("deps.minecraft_min") as String
+            prop("deps.forge_config_api_port_min") {
+                put("forge_config_api_port_min_version", it)
+            }
+            prop("deps.min_fabric_api_version") {
+                put("fabric_api_min_version", it)
+            }
+            put("min_minecraft_version", property("deps.minecraft_min") as String)
+            put("minecraft_upper_bound", if (property("deps.minecraft")?.equals("latest") == true) {
+                ""
             } else {
-                minecraftVersion.toString()
-            }
-            put("minecraft_min_version", minimumMinecraftVersion)
+                if (modstitch.isLoom) {
+                    " <=${minecraftVersion.get()}"
+                } else {
+                    minecraftVersion.get()
+                }
+            })
             put("loader_version", property("deps.loader_version_min") as String)
-            if (modstitch.isLoom) {
-                put("fabric_api_version", property("deps.req_fabric_api_version") as String)
-                put("forge_config_api_port_min_version", property("deps.forge_config_api_port_min") as String)
-            }
         }
     }
 
+    // Fabric Loom (Fabric)
     loom {
-        fabricLoaderVersion = fabricLoaderVersionO
+        // It's not recommended to store the Fabric Loader version in properties.
+        // Make sure it's up to date.
+        fabricLoaderVersion = "0.18.4"
 
+        // Configure loom like normal in this block.
         configureLoom {}
     }
 
+    // ModDevGradle (NeoForge, Forge, Forgelike)
     moddevgradle {
         prop("deps.neoforge") { neoForgeVersion = it }
 
+        // Configures client and server runs for MDG, it is not done by default
         defaultRuns()
     }
 
     mixin {
+        // You do not need to specify mixins in any mods.json/toml file if this is set to
+        // true, it will automatically be generated.
         addMixinsToModManifest = true
 
         configs.register("cropsloverain")
@@ -69,12 +86,14 @@ modstitch {
 
 var constraint: String = name.split("-")[1]
 stonecutter {
-    constants += arrayOf(
-        "fabric" to (constraint == "fabric"),
-        "neoforge" to (constraint == "neoforge"),
-        "forge" to (constraint == "forge"),
-        "vanilla" to (constraint == "vanilla")
-    )
+    constants.match(constraint, "fabric", "neoforge")
+
+    replacements {
+        string {
+            direction = eval(current.version, ">=1.21.11")
+            replace("ResourceLocation", "Identifier")
+        }
+    }
 }
 
 repositories {
@@ -90,7 +109,7 @@ repositories {
 
 dependencies {
     modstitch.loom {
-        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api_version") as String}")
+        modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api_version")}")
         modstitchModApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${property("deps.forge_config_api_port")}")
         modstitchModLocalRuntime("com.terraformersmc:modmenu:${property("deps.mod_menu")}")
     }

@@ -1,7 +1,7 @@
 ## Changes
 
-* Port to 1.21.9 and 1.21.10
+* Port to 1.21.11
 
 ## Fixes
 
-* fix: now properly runs on older versions of NeoForge
+* fix: dependency version requirements

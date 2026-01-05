@@ -3,7 +3,7 @@ package io.github.thepoultryman.cropsloverain.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.StemBlock;
@@ -20,7 +20,7 @@ public abstract class StemBlockGrowthSpeedup {
     @Unique
     private int crops_Love_Rain$extraGrowth;
     @Unique
-    private static final ResourceLocation MELON_LOCATION = ResourceLocation.withDefaultNamespace("melon_stem");
+    private static final Identifier MELON_LOCATION = Identifier.withDefaultNamespace("melon_stem");
 
     @Inject(at = @At("HEAD"), method = "randomTick")
     private void crops_love_rain$randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
