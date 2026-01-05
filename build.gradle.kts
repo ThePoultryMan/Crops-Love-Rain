@@ -179,7 +179,7 @@ publishMods {
 
         if (modstitch.isLoom) {
             requires("fabric-api")
-            requires("forge-config-api-port-fabric")
+            requires("forge-config-api-port")
         }
     }
 }
