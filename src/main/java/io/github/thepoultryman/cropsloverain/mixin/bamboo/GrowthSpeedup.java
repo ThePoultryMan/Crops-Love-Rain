@@ -24,7 +24,15 @@ public abstract class GrowthSpeedup {
 
     @Shadow protected abstract void growBamboo(BlockState state, Level level, BlockPos pos, RandomSource random, int height);
 
-    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
+    @Inject(
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/BambooStalkBlock;getHeightBelowUpToMax(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)I",
+                    shift = At.Shift.AFTER
+            ),
+            method = "randomTick",
+            cancellable = true
+    )
     public void crops_love_rain$extraBlockTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
         if (state.getValue(STAGE) == 0 && level.getBlockState(pos.above()).isAir() && level.getRawBrightness(pos.above(), 0) >= 9 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Bamboo)) {
             int bambooBelow = getHeightBelowUpToMax(level, pos) + 1;

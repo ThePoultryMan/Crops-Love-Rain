@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +21,14 @@ public abstract class StemBlockGrowthSpeedup {
     @Unique
     private static final Identifier MELON_LOCATION = Identifier.withDefaultNamespace("melon_stem");
 
-    @Inject(at = @At("HEAD"), method = "randomTick")
+    @Inject(
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/level/ServerLevel;getRawBrightness(Lnet/minecraft/core/BlockPos;I)I",
+                    shift = At.Shift.AFTER
+            ),
+            method = "randomTick"
+    )
     private void crops_love_rain$randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
         CropsLoveRain.CropType cropType;
         if (CropsLoveRain.CONFIG.separateStemSpeed.get()) {
@@ -35,8 +41,13 @@ public abstract class StemBlockGrowthSpeedup {
         }
     }
 
-    @Debug(export = true)
-    @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"), method = "randomTick")
+    @ModifyExpressionValue(
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/util/RandomSource;nextInt(I)I"
+            ),
+            method = "randomTick"
+    )
     private int crops_love_rain$randomTickCheck(int original) {
         boolean haltGrowth = CropsLoveRain.CONFIG.debugMode.get() && CropsLoveRain.CONFIG.haltRegularGrowth.get();
         if (haltGrowth) {

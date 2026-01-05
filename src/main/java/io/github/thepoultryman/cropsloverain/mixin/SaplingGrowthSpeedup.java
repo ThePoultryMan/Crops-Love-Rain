@@ -16,9 +16,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SaplingGrowthSpeedup {
     @Shadow public abstract void advanceTree(ServerLevel level, BlockPos pos, BlockState state, RandomSource random);
 
-    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
+    @Inject(
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/level/ServerLevel;isAreaLoaded(Lnet/minecraft/core/BlockPos;I)Z",
+                    shift = At.Shift.AFTER
+            ),
+            method = "randomTick",
+            cancellable = true
+    )
     public void crops_love_rain$randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.Sapling)) {
+        if (world.getMaxLocalRawBrightness(pos.above()) >= 9 && CropsLoveRain.shouldGrowExtra(world, pos, random, CropsLoveRain.CropType.Sapling)) {
             advanceTree(world, pos, state, random);
             if (CropsLoveRain.CONFIG.debugMode.get()) {
                 CropsLoveRain.LOGGER.info("{} grew into a tree", this);

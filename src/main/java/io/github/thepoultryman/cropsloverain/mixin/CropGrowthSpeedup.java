@@ -19,14 +19,24 @@ public abstract class CropGrowthSpeedup {
     @Shadow
     public abstract int getAge(BlockState state);
 
-    @Inject(at = @At("HEAD"), method = "randomTick", cancellable = true)
+    @Shadow
+    public abstract int getMaxAge();
+
+    @Inject(
+            at = @At(
+                    value = "INVOKE",
+                    shift = At.Shift.AFTER,
+                    target = "Lnet/minecraft/world/level/block/CropBlock;getAge(Lnet/minecraft/world/level/block/state/BlockState;)I"
+            ),
+            method = "randomTick",
+            cancellable = true
+    )
     public void crops_love_rain$randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (level.getRawBrightness(pos, 0) >= 9) {
-            if (this.getAge(state) < 7 && CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Crop)) {
-                level.setBlock(pos, this.getStateForAge(this.getAge(state) + 1), 2);
-                if (CropsLoveRain.CONFIG.debugMode.get()) {
-                    CropsLoveRain.LOGGER.info("{} grew an extra state.", this);
-                }
+        int currentAge = this.getAge(state);
+        if (CropsLoveRain.shouldGrowExtra(level, pos, random, CropsLoveRain.CropType.Crop) && currentAge < this.getMaxAge()) {
+            level.setBlock(pos, this.getStateForAge(currentAge + 1), 2);
+            if (CropsLoveRain.CONFIG.debugMode.get()) {
+                CropsLoveRain.LOGGER.info("{} grew an extra state.", this);
             }
         }
         if (CropsLoveRain.CONFIG.debugMode.get() && CropsLoveRain.CONFIG.haltRegularGrowth.get()) {
