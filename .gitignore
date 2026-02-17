@@ -19,3 +19,6 @@ classes/
 .settings
 *.launch
 .architectury-transformer/debug.log
+
+.direnv
+.envrc
