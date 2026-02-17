@@ -17,11 +17,7 @@ public abstract class SaplingGrowthSpeedup {
     @Shadow public abstract void advanceTree(ServerLevel level, BlockPos pos, BlockState state, RandomSource random);
 
     @Inject(
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/level/ServerLevel;isAreaLoaded(Lnet/minecraft/core/BlockPos;I)Z",
-                    shift = At.Shift.AFTER
-            ),
+            at = @At(value = "HEAD"),
             method = "randomTick",
             cancellable = true
     )
