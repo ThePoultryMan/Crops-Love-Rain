@@ -23,7 +23,6 @@
     "fabricloader": ">=${loader_version}",
     "minecraft": ">=${min_minecraft_version}${minecraft_upper_bound}",
     "fabric-api": ">=${fabric_api_min_version}",
-    "forgeconfigapiport": ">=${forge_config_api_port_min_version}",
-    "modmenu": "*"
+    "forgeconfigapiport": ">=${forge_config_api_port_min_version}"
   }
 }
