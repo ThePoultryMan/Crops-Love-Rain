@@ -10,10 +10,12 @@
       systems = import inputs.systems;
 
       perSystem = { config, self', pkgs, lib, system, ... }: let
-        java = pkgs.javaPackages.compiler.temurin-bin.jdk-25;
+        java25 = pkgs.javaPackages.compiler.temurin-bin.jdk-25;
+        java21 = pkgs.javaPackages.compiler.temurin-bin.jdk-21;
 
         nativeBuildInputs = with pkgs; [
-          java
+          java25
+          java21
           git
         ];
 
@@ -30,7 +32,8 @@
 
           env = {
             LD_LIBRARY_PATH = lib.makeLibraryPath buildInputs;
-            JAVA_HOME = "${java.home}";
+            JDK21 = "${java21}";
+            JAVA_HOME = "${java25.home}";
           };
         };
       };
