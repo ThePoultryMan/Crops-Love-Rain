@@ -32,7 +32,7 @@ stonecutter {
         }
 
         // Configure your targets here!
-        listOf("1.21.6", "1.21.11").forEach {
+        listOf("1.21.0", "1.21.6", "1.21.11").forEach {
             mc(it, loaders = listOf("fabric", "neoforge"))
         }
 

@@ -1,7 +1,10 @@
 //? if fabric {
 /*package io.github.thepoultryman.cropsloverain.fabric;
 
-import fuzs.forgeconfigapiport.fabric.api.v5.client.ConfigScreenFactoryRegistry;
+//? if > 1.21.4 {
+ import fuzs.forgeconfigapiport.fabric.api.v5.client.ConfigScreenFactoryRegistry;
+//? } else
+//import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.client.ConfigScreenFactoryRegistry;
 import io.github.thepoultryman.cropsloverain.CropsLoveRain;
 import net.fabricmc.api.ClientModInitializer;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
