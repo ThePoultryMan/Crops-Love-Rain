@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +33,7 @@ public abstract class StemBlockGrowthSpeedup {
     private void crops_love_rain$randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
         CropsLoveRain.CropType cropType;
         if (CropsLoveRain.CONFIG.separateStemSpeed.get()) {
-            cropType = blockState.getBlockHolder().is(MELON_LOCATION) ? CropsLoveRain.CropType.Melon : CropsLoveRain.CropType.Pumpkin;
+            cropType = blockState.is(Blocks.MELON_STEM) ? CropsLoveRain.CropType.Melon : CropsLoveRain.CropType.Pumpkin;
         } else {
             cropType = CropsLoveRain.CropType.Crop;
         }

@@ -1,7 +1,7 @@
 import net.fabricmc.loom.task.RemapJarTask;
 
 plugins {
-    id("dev.isxander.modstitch.base") version "0.8.0"
+    id("dev.isxander.modstitch.base") version "0.8.4"
     id("me.modmuss50.mod-publish-plugin") version("1.1.0")
 }
 
@@ -43,7 +43,11 @@ modstitch {
             prop("deps.min_fabric_api_version") {
                 put("fabric_api_min_version", it)
             }
-            put("min_minecraft_version", property("deps.minecraft_min") as String)
+            put("min_minecraft_version", if (hasProperty("deps.minecraft_min")) {
+                property("deps.minecraft_min").toString()
+            } else {
+                minecraft
+            })
             put("minecraft_upper_bound", if (property("deps.minecraft")?.equals("latest") == true) {
                 if (modstitch.isLoom) "" else ")"
             } else {
@@ -111,12 +115,16 @@ dependencies {
     modstitch.loom {
         modstitchModImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api_version")}")
         modstitchModApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${property("deps.forge_config_api_port")}")
-        modstitchModLocalRuntime("com.terraformersmc:modmenu:${property("deps.mod_menu")}")
+        modstitchModLocalRuntime("com.terraformersmc:modmenu:${property("deps.mod_menu")}") {
+            if (stonecutter.eval(minecraft, ">= 26.1")) {
+                exclude(group = "eu.pb4")
+            }
+        }
     }
 }
 
 publishMods {
-    if (modstitch.isLoom) {
+    if (modstitch.isLoom && stonecutter.eval(minecraft, "< 26.1")) {
         file.set(tasks.named<RemapJarTask>("remapJar").get().archiveFile)
     } else {
         file.set(tasks.jar.get().archiveFile)

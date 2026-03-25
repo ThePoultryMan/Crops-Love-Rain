@@ -17,7 +17,7 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.kikugie.stonecutter") version "0.8.2"
+    id("dev.kikugie.stonecutter") version "0.9"
 }
 
 stonecutter {
@@ -32,13 +32,13 @@ stonecutter {
         }
 
         // Configure your targets here!
-        listOf("1.21.0", "1.21.6", "1.21.11").forEach {
+        listOf("1.21.0", "1.21.6", "1.21.11", "26.1").forEach {
             mc(it, loaders = listOf("fabric", "neoforge"))
         }
 
         // This is the default target.
         // https://stonecutter.kikugie.dev/stonecutter/guide/setup#settings-settings-gradle-kts
-        vcsVersion = "1.21.11-neoforge"
+        vcsVersion = "26.1-neoforge"
     }
 }
 

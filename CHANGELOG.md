@@ -1,6 +1,6 @@
 ## Changes
 
-* Minecraft 1.21.0-1.21.4 support
+* Support for Minecraft 1.21.0-1.21.4 and 26.1
 
 ## Fixes
 
