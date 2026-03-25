@@ -23,6 +23,7 @@
           (lib.getLib stdenv.cc.cc)
           glfw3-minecraft
           libGL
+          libpulseaudio
           libx11
           libxcursor
         ];
