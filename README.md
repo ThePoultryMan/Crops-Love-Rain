@@ -1,3 +1,9 @@
+# ATTENTION
+
+**This repo has migrated to [Codeberg](https://codeberg.org/ThePoultryMan/Crops-Love-Rain).**
+
+---
+
 <a href="https://curseforge.com/Minecraft/mc-mods/fabric" target="_blank"><img src="https://user-images.githubusercontent.com/66281330/153967852-6b03d1f2-d795-4748-afe9-6074ea25701a.png" alt="Requires Fabric API" width=225></a>
 
 ## About
